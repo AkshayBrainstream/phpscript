@@ -75,6 +75,27 @@ try {
             'mentor_marks' => $worksheet->getCell('M' . $row)->getValue(),
             'soft_skill_marks' => $worksheet->getCell('N' . $row)->getValue(),
             'lab_testing_skill' => $worksheet->getCell('O' . $row)->getValue(),
+            'laboratory_testing_skill' => $worksheet->getCell('P' . $row)->getValue(),
+            'domain_based_practical_skill' => $worksheet->getCell('Q' . $row)->getValue(),
+            'industrial_visit' => $worksheet->getCell('R' . $row)->getValue(),
+            'industrial_training' => $worksheet->getCell('S' . $row)->getValue(),
+            'workshop_attended' => $worksheet->getCell('T' . $row)->getValue(),
+            'seminar_expert_talk' => $worksheet->getCell('U' . $row)->getValue(),
+            'software_skills' => $worksheet->getCell('V' . $row)->getValue(),
+            'verbal_aspect' => $worksheet->getCell('W' . $row)->getValue(),
+            'major_project_type' => $worksheet->getCell('X' . $row)->getValue(),
+            'pa_membership' => $worksheet->getCell('Y' . $row)->getValue(),
+            'professional_membership' => $worksheet->getCell('Z' . $row)->getValue(),
+            'techno_art_competition' => $worksheet->getCell('AA' . $row)->getValue(),
+            'conference_attended' => $worksheet->getCell('AB' . $row)->getValue(),
+            'online_course' => $worksheet->getCell('AC' . $row)->getValue(),
+            'linkage_profile' => $worksheet->getCell('AD' . $row)->getValue(),
+            'freelance_project' => $worksheet->getCell('AE' . $row)->getValue(),
+            'sura_profile' => $worksheet->getCell('AF' . $row)->getValue(),
+            'resume_updation' => $worksheet->getCell('AG' . $row)->getValue(),
+            'iq_test' => $worksheet->getCell('AH' . $row)->getValue(),
+            'ed_test' => $worksheet->getCell('AI' . $row)->getValue(),
+            'aptitude_test' => $worksheet->getCell('AJ' . $row)->getValue(),
         ];
     }
 
@@ -213,6 +234,23 @@ try {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .btn-download {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -243,25 +281,77 @@ try {
                         <th>Patent</th>
                         <th>Eval. Marks</th>
                         <th>Mentor Marks</th>
+                        <th>Soft Skills</th>
+                        <th>Lab Testing</th>
+                        <th>Laboratory Testing</th>
+                        <th>Domain Practical</th>
+                        <th>Industrial Visit</th>
+                        <th>Industrial Training</th>
+                        <th>Workshop</th>
+                        <th>Seminar/Expert</th>
+                        <th>Software Skills</th>
+                        <th>Verbal Aspect</th>
+                        <th>Major Project</th>
+                        <th>PA Membership</th>
+                        <th>Professional</th>
+                        <th>Techno Art</th>
+                        <th>Conference</th>
+                        <th>Online Course</th>
+                        <th>Linkage Profile</th>
+                        <th>Freelance</th>
+                        <th>SURA Profile</th>
+                        <th>Resume</th>
+                        <th>IQ Test</th>
+                        <th>ED Test</th>
+                        <th>Aptitude</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($students as $index => $student): ?>
                     <tr>
                         <td><?php echo $index + 1; ?></td>
-                        <td><?php echo htmlspecialchars($student['name']); ?></td>
-                        <td><?php echo htmlspecialchars($student['enrollment']); ?></td>
-                        <td><?php echo htmlspecialchars($student['semester']); ?></td>
-                        <td><?php echo htmlspecialchars($student['branch']); ?></td>
-                        <td><?php echo htmlspecialchars($student['card_issue_month']); ?></td>
-                        <td><?php echo htmlspecialchars($student['card_number']); ?></td>
-                        <td><?php echo htmlspecialchars($student['spi']); ?></td>
-                        <td><?php echo htmlspecialchars($student['sdp']); ?></td>
-                        <td><?php echo htmlspecialchars($student['research_paper']); ?></td>
-                        <td><?php echo htmlspecialchars($student['book_published']); ?></td>
-                        <td><?php echo htmlspecialchars($student['patent']); ?></td>
-                        <td><?php echo htmlspecialchars($student['evaluator_marks']); ?></td>
-                        <td><?php echo htmlspecialchars($student['mentor_marks']); ?></td>
+                        <td><?php echo htmlspecialchars($student['name'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['enrollment'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['semester'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['branch'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['card_issue_month'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['card_number'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['spi'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['sdp'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['research_paper'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['book_published'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['patent'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['evaluator_marks'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['mentor_marks'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['soft_skill_marks'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['lab_testing_skill'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['laboratory_testing_skill'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['domain_based_practical_skill'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['industrial_visit'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['industrial_training'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['workshop_attended'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['seminar_expert_talk'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['software_skills'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['verbal_aspect'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['major_project_type'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['pa_membership'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['professional_membership'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['techno_art_competition'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['conference_attended'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['online_course'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['linkage_profile'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['freelance_project'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['sura_profile'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['resume_updation'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['iq_test'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['ed_test'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($student['aptitude_test'] ?? ''); ?></td>
+                        <td>
+                            <a href="generate_single_certificate.php?index=<?php echo $index; ?>" class="btn-download" title="Download Certificate">
+                                📄 Download
+                            </a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

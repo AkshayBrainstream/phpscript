@@ -81,6 +81,29 @@ foreach ($students as $index => $student) {
     $patent = $student['patent'];
     $evaluatorMarks = $student['evaluator_marks'];
     $mentorMarks = $student['mentor_marks'];
+    $softSkillMarks = $student['soft_skill_marks'];
+    $labTestingSkill = $student['lab_testing_skill'];
+    $laboratoryTestingSkill = $student['laboratory_testing_skill'];
+    $domainBasedPracticalSkill = $student['domain_based_practical_skill'];
+    $industrialVisit = $student['industrial_visit'];
+    $industrialTraining = $student['industrial_training'];
+    $workshopAttended = $student['workshop_attended'];
+    $seminarExpertTalk = $student['seminar_expert_talk'];
+    $softwareSkills = $student['software_skills'];
+    $verbalAspect = $student['verbal_aspect'];
+    $majorProjectType = $student['major_project_type'];
+    $paMembership = $student['pa_membership'];
+    $professionalMembership = $student['professional_membership'];
+    $technoArtCompetition = $student['techno_art_competition'];
+    $conferenceAttended = $student['conference_attended'];
+    $onlineCourse = $student['online_course'];
+    $linkageProfile = $student['linkage_profile'];
+    $freelanceProject = $student['freelance_project'];
+    $suraProfile = $student['sura_profile'];
+    $resumeUpdation = $student['resume_updation'];
+    $iqTest = $student['iq_test'];
+    $edTest = $student['ed_test'];
+    $aptitudeTest = $student['aptitude_test'];
 
     // Create image from template
     $image = imagecreatefromjpeg($baseImagePath);
@@ -101,19 +124,66 @@ foreach ($students as $index => $student) {
     imagettftext($image, $fontSize, 0, 430, 185, $black, $fontPath, $cardIssueMonth ?? '');
     imagettftext($image, $fontSize, 0, 700, 185, $black, $fontPath, $cardNumber ?? '');
 
-    // Academic scores
+    // Academic scores (Left section - Academic)
     imagettftext($image, $smallFontSize, 0, 165, 272, $black, $fontPath, $spi ?? '0');
     imagettftext($image, $smallFontSize, 0, 210, 272, $black, $fontPath, $spi ?? '0');
     imagettftext($image, $smallFontSize, 0, 165, 290, $black, $fontPath, $sdp ?? '0');
     imagettftext($image, $smallFontSize, 0, 210, 290, $black, $fontPath, $sdp ?? '0');
+    imagettftext($image, $smallFontSize, 0, 165, 308, $black, $fontPath, '0'); // TSEP
+    imagettftext($image, $smallFontSize, 0, 210, 308, $black, $fontPath, '0'); // TSEP Overall
     imagettftext($image, $smallFontSize, 0, 165, 325, $black, $fontPath, $researchPaper ?? '0');
     imagettftext($image, $smallFontSize, 0, 210, 325, $black, $fontPath, $researchPaper ?? '0');
     imagettftext($image, $smallFontSize, 0, 165, 343, $black, $fontPath, $patent ?? '0');
     imagettftext($image, $smallFontSize, 0, 210, 343, $black, $fontPath, $patent ?? '0');
     imagettftext($image, $smallFontSize, 0, 165, 361, $black, $fontPath, $bookPublished ?? '0');
     imagettftext($image, $smallFontSize, 0, 210, 361, $black, $fontPath, $bookPublished ?? '0');
+
+    // Evaluator and Mentor marks
     imagettftext($image, $smallFontSize, 0, 190, 425, $black, $fontPath, $evaluatorMarks ?? '0');
     imagettftext($image, $smallFontSize, 0, 190, 525, $black, $fontPath, $mentorMarks ?? '0');
+
+    // Middle section - Placement Activity
+    imagettftext($image, $smallFontSize, 0, 425, 280, $black, $fontPath, $laboratoryTestingSkill ?? '0'); // Lab Testing Sem
+    imagettftext($image, $smallFontSize, 0, 475, 280, $black, $fontPath, $laboratoryTestingSkill ?? '0'); // Lab Testing Overall
+    imagettftext($image, $smallFontSize, 0, 425, 298, $black, $fontPath, $domainBasedPracticalSkill ?? '0'); // Equipment Operation Sem
+    imagettftext($image, $smallFontSize, 0, 475, 298, $black, $fontPath, $domainBasedPracticalSkill ?? '0'); // Equipment Operation Overall
+    imagettftext($image, $smallFontSize, 0, 425, 316, $black, $fontPath, $industrialVisit ?? '0'); // Industrial Visit Sem
+    imagettftext($image, $smallFontSize, 0, 475, 316, $black, $fontPath, $industrialVisit ?? '0'); // Industrial Visit Overall
+    imagettftext($image, $smallFontSize, 0, 425, 334, $black, $fontPath, $industrialTraining ?? '0'); // Industrial Training Sem
+    imagettftext($image, $smallFontSize, 0, 475, 334, $black, $fontPath, $industrialTraining ?? '0'); // Industrial Training Overall
+    imagettftext($image, $smallFontSize, 0, 425, 352, $black, $fontPath, $workshopAttended ?? '0'); // Workshop Sem
+    imagettftext($image, $smallFontSize, 0, 475, 352, $black, $fontPath, $workshopAttended ?? '0'); // Workshop Overall
+    imagettftext($image, $smallFontSize, 0, 425, 370, $black, $fontPath, $seminarExpertTalk ?? '0'); // Seminar Sem
+    imagettftext($image, $smallFontSize, 0, 475, 370, $black, $fontPath, $seminarExpertTalk ?? '0'); // Seminar Overall
+    imagettftext($image, $smallFontSize, 0, 425, 388, $black, $fontPath, $softwareSkills ?? '0'); // Software Skills Sem
+    imagettftext($image, $smallFontSize, 0, 475, 388, $black, $fontPath, $softwareSkills ?? '0'); // Software Skills Overall
+    imagettftext($image, $smallFontSize, 0, 425, 406, $black, $fontPath, '0'); // Minor Project Sem
+    imagettftext($image, $smallFontSize, 0, 475, 406, $black, $fontPath, '0'); // Minor Project Overall
+    imagettftext($image, $smallFontSize, 0, 425, 424, $black, $fontPath, $majorProjectType ?? '0'); // Major Project Sem
+    imagettftext($image, $smallFontSize, 0, 475, 424, $black, $fontPath, $majorProjectType ?? '0'); // Major Project Overall
+    imagettftext($image, $smallFontSize, 0, 425, 442, $black, $fontPath, $paMembership ?? '0'); // PA Attendance Sem
+    imagettftext($image, $smallFontSize, 0, 475, 442, $black, $fontPath, $paMembership ?? '0'); // PA Attendance Overall
+    imagettftext($image, $smallFontSize, 0, 475, 460, $black, $fontPath, $professionalMembership ?? '0'); // Professional Membership
+
+    // Right section - Technical Event Participation/Online Courses
+    imagettftext($image, $smallFontSize, 0, 720, 280, $black, $fontPath, $technoArtCompetition ?? '0'); // Technical Event Sem
+    imagettftext($image, $smallFontSize, 0, 770, 280, $black, $fontPath, $technoArtCompetition ?? '0'); // Technical Event Overall
+    imagettftext($image, $smallFontSize, 0, 720, 298, $black, $fontPath, $conferenceAttended ?? '0'); // Conference Sem
+    imagettftext($image, $smallFontSize, 0, 770, 298, $black, $fontPath, $conferenceAttended ?? '0'); // Conference Overall
+    imagettftext($image, $smallFontSize, 0, 720, 316, $black, $fontPath, $onlineCourse ?? '0'); // Online Courses Sem
+    imagettftext($image, $smallFontSize, 0, 770, 316, $black, $fontPath, $onlineCourse ?? '0'); // Online Courses Overall
+
+    // Right section - Co & Extra Curricular Activities
+    imagettftext($image, $smallFontSize, 0, 770, 405, $black, $fontPath, $linkageProfile ?? '0'); // LinkedIn Profile
+    imagettftext($image, $smallFontSize, 0, 770, 423, $black, $fontPath, $freelanceProject ?? '0'); // Freelancer Profile
+    imagettftext($image, $smallFontSize, 0, 770, 441, $black, $fontPath, '0'); // SILP Course
+    imagettftext($image, $smallFontSize, 0, 770, 459, $black, $fontPath, $resumeUpdation ?? '0'); // Resume Updated
+    imagettftext($image, $smallFontSize, 0, 770, 477, $black, $fontPath, $iqTest ?? '0'); // IQ Test
+    imagettftext($image, $smallFontSize, 0, 770, 495, $black, $fontPath, $edTest ?? '0'); // EQ Test
+    imagettftext($image, $smallFontSize, 0, 770, 513, $black, $fontPath, $aptitudeTest ?? '0'); // Aptitude Test
+
+    // TPA Cell - Most Recent HR, Communication Skill & Management Skill
+    imagettftext($image, $smallFontSize, 0, 520, 595, $black, $fontPath, $softSkillMarks ?? '0'); // TPA Cell Overall
 
     // Save the image temporarily
     $tempImagePath = 'temp_certificate_' . $index . '_' . time() . '.jpg';
