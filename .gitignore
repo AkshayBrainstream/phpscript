@@ -1,0 +1,31 @@
+# Uploaded files
+uploads/
+*.xlsx
+*.xls
+
+# Generated files
+downloads/
+output_certificate.jpg
+temp_certificate_*.jpg
+
+# Composer dependencies
+vendor/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local

@@ -44,11 +44,17 @@ imagesavealpha($image, true);
 $black = imagecolorallocate($image, 0, 0, 0);
 $darkBrown = imagecolorallocate($image, 101, 67, 33);
 
-// Define font path (using default GD font, or specify TTF font path)
-// For better quality, download a TTF font and use imagettftext
-$fontPath = '/System/Library/Fonts/Helvetica.ttc'; // Mac default font
+// Define font for GD image processing
 $fontSize = 16;
 $smallFontSize = 12;
+
+// Use bundled font from assets folder (cross-platform solution)
+$fontPath = 'assets/fonts/arial.ttf';
+
+// Check if font file exists
+if (!file_exists($fontPath)) {
+    die('Error: Font file not found at ' . $fontPath . '. Please place arial.ttf in the assets/fonts directory.');
+}
 
 // Add text to image at specific positions
 // Coordinates are approximate - adjust as needed for perfect alignment

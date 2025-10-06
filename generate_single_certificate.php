@@ -71,9 +71,17 @@ $pdf->SetMargins(0, 0, 0);
 $pdf->SetAutoPageBreak(false, 0);
 
 // Define font for GD image processing
-$fontPath = '/System/Library/Fonts/Helvetica.ttc';
 $fontSize = 16;
 $smallFontSize = 12;
+
+// Use bundled font from assets folder (cross-platform solution)
+$fontPath = 'assets/fonts/arial.ttf';
+
+// Check if font file exists
+if (!file_exists($fontPath)) {
+    ob_end_clean();
+    die('Error: Font file not found at ' . $fontPath . '. Please place arial.ttf in the assets/fonts directory.');
+}
 
 // Get data from student array
 $studentName = $student['name'];
