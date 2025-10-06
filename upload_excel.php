@@ -4,6 +4,22 @@ require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
+// Check if we already have students in session (pagination navigation)
+if (isset($_SESSION['students']) && !isset($_FILES['excel_file'])) {
+    // Just viewing existing data with pagination
+    $students = $_SESSION['students'];
+
+    // Pagination variables
+    $perPage = 10;
+    $totalStudents = count($students);
+    $totalPages = ceil($totalStudents / $perPage);
+    $currentPage = isset($_GET['page']) ? max(1, min((int)$_GET['page'], $totalPages)) : 1;
+    $offset = ($currentPage - 1) * $perPage;
+
+    // Skip to display section
+    goto display_students;
+}
+
 // Check if file was uploaded
 if (!isset($_FILES['excel_file']) || $_FILES['excel_file']['error'] !== UPLOAD_ERR_OK) {
     header('Location: index.php?error=upload');
@@ -102,11 +118,19 @@ try {
     // Store students data in session
     $_SESSION['students'] = $students;
 
+    // Pagination variables
+    $perPage = 10;
+    $totalStudents = count($students);
+    $totalPages = ceil($totalStudents / $perPage);
+    $currentPage = isset($_GET['page']) ? max(1, min((int)$_GET['page'], $totalPages)) : 1;
+    $offset = ($currentPage - 1) * $perPage;
+
 } catch (Exception $e) {
     header('Location: index.php?error=read_failed&msg=' . urlencode($e->getMessage()));
     exit;
 }
 
+display_students:
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -251,6 +275,35 @@ try {
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(23, 162, 184, 0.4);
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .page-link {
+            padding: 8px 12px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .page-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        .page-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            cursor: default;
+        }
     </style>
 </head>
 <body>
@@ -260,13 +313,14 @@ try {
 
         <div class="info-box">
             <strong>File Uploaded Successfully!</strong><br>
-            Found <?php echo count($students); ?> student records. Review the data below and click "Generate All Certificates" to create PDFs.
+            Found <?php echo $totalStudents; ?> student records. Showing <?php echo min($perPage, $totalStudents - $offset); ?> records (Page <?php echo $currentPage; ?> of <?php echo $totalPages; ?>).
         </div>
 
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
+                        <th>Actions</th>
                         <th>#</th>
                         <th>Name</th>
                         <th>Enrollment</th>
@@ -304,12 +358,19 @@ try {
                         <th>IQ Test</th>
                         <th>ED Test</th>
                         <th>Aptitude</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($students as $index => $student): ?>
+                    <?php
+                    $studentsToShow = array_slice($students, $offset, $perPage, true);
+                    foreach ($studentsToShow as $index => $student):
+                    ?>
                     <tr>
+                        <td>
+                            <a href="generate_single_certificate.php?index=<?php echo $index; ?>" class="btn-download" title="Download Certificate">
+                                📄 Download
+                            </a>
+                        </td>
                         <td><?php echo $index + 1; ?></td>
                         <td><?php echo htmlspecialchars($student['name'] ?? ''); ?></td>
                         <td><?php echo htmlspecialchars($student['enrollment'] ?? ''); ?></td>
@@ -347,16 +408,31 @@ try {
                         <td><?php echo htmlspecialchars($student['iq_test'] ?? ''); ?></td>
                         <td><?php echo htmlspecialchars($student['ed_test'] ?? ''); ?></td>
                         <td><?php echo htmlspecialchars($student['aptitude_test'] ?? ''); ?></td>
-                        <td>
-                            <a href="generate_single_certificate.php?index=<?php echo $index; ?>" class="btn-download" title="Download Certificate">
-                                📄 Download
-                            </a>
-                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
+
+        <?php if ($totalPages > 1): ?>
+        <div class="pagination">
+            <?php if ($currentPage > 1): ?>
+                <a href="?page=<?php echo $currentPage - 1; ?>" class="page-link">&laquo; Previous</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <?php if ($i == $currentPage): ?>
+                    <span class="page-link active"><?php echo $i; ?></span>
+                <?php else: ?>
+                    <a href="?page=<?php echo $i; ?>" class="page-link"><?php echo $i; ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($currentPage < $totalPages): ?>
+                <a href="?page=<?php echo $currentPage + 1; ?>" class="page-link">Next &raquo;</a>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
 
         <div class="actions">
             <a href="index.php" class="btn btn-secondary">Upload New File</a>
