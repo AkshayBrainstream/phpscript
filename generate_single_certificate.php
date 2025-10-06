@@ -53,8 +53,8 @@ if (!file_exists($baseImagePath)) {
 // Clear any output buffer before creating PDF
 ob_end_clean();
 
-// Create PDF with TCPDF
-$pdf = new \TCPDF('L', 'mm', 'A4', true, 'UTF-8', false);
+// Create PDF with TCPDF (Portrait orientation)
+$pdf = new \TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
 // Set document information
 $pdf->SetCreator('GMIU Certificate Generator');
@@ -201,20 +201,42 @@ imagettftext($image, $smallFontSize, 0, 770, 513, $black, $fontPath, $aptitudeTe
 // TPA Cell - Most Recent HR, Communication Skill & Management Skill
 imagettftext($image, $smallFontSize, 0, 520, 595, $black, $fontPath, $softSkillMarks ?? '0'); // TPA Cell Overall
 
-// Save the image temporarily
+// Save the image temporarily with maximum quality
 $tempImagePath = 'temp_certificate_' . $studentIndex . '_' . time() . '.jpg';
-imagejpeg($image, $tempImagePath, 95);
+imagejpeg($image, $tempImagePath, 100); // Maximum quality
 imagedestroy($image);
 
-// Add a new page to PDF
-$pdf->AddPage();
+// Add a new page to PDF (Portrait orientation for the certificate)
+$pdf->AddPage('P', 'A4'); // Portrait orientation
 
-// Get page dimensions
-$pageWidth = 297; // A4 landscape width in mm
-$pageHeight = 210; // A4 landscape height in mm
+// Get page dimensions for A4 Portrait
+$pageWidth = 210; // A4 portrait width in mm
+$pageHeight = 297; // A4 portrait height in mm
 
-// Add the image to PDF (full page)
-$pdf->Image($tempImagePath, 0, 0, $pageWidth, $pageHeight, 'JPG', '', '', true, 300, '', false, false, 0, false, false, false);
+// Get original image dimensions
+list($imgWidth, $imgHeight) = getimagesize($tempImagePath);
+$imgAspectRatio = $imgWidth / $imgHeight;
+
+// Set equal margins for top and sides
+$sideMargin = 10; // 10mm margin on left and right
+$topMargin = 10;  // 10mm margin on top
+
+// Calculate available dimensions
+$availableWidth = $pageWidth - (2 * $sideMargin);
+
+// Calculate height maintaining aspect ratio
+$finalWidth = $availableWidth;
+$finalHeight = $availableWidth / $imgAspectRatio;
+
+// Calculate bottom margin (will show remaining space)
+$bottomMargin = $pageHeight - $finalHeight - $topMargin;
+
+// Position: fixed margins on top and sides
+$x = $sideMargin;
+$y = $topMargin;
+
+// Add the image to PDF with proper positioning and no compression/resizing
+$pdf->Image($tempImagePath, $x, $y, $finalWidth, $finalHeight, 'JPG', '', '', false, 300, '', false, false, 0, false, false, false);
 
 // Clean up temp image
 if (file_exists($tempImagePath)) {
