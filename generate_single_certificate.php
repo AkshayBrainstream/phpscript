@@ -132,13 +132,13 @@ imagesavealpha($image, true);
 $black = imagecolorallocate($image, 0, 0, 0);
 
 // Add text to image - Header fields
-imagettftext($image, $fontSize, 0, 150, 115, $black, $fontPath, $studentName ?? '');
-imagettftext($image, $fontSize, 0, 230, 150, $black, $fontPath, $enrollmentNumber ?? '');
-imagettftext($image, $fontSize, 0, 440, 150, $black, $fontPath, $semester ?? '');
-imagettftext($image, $fontSize, 0, 700, 150, $black, $fontPath, $branch ?? '');
-imagettftext($image, $fontSize, 0, 200, 185, $black, $fontPath, '2024-25');
-imagettftext($image, $fontSize, 0, 430, 185, $black, $fontPath, $cardIssueMonth ?? '');
-imagettftext($image, $fontSize, 0, 700, 185, $black, $fontPath, $cardNumber ?? '');
+imagettftext($image, $smallFontSize, 0, 155, 100, $black, $fontPath, $studentName ?? '');
+imagettftext($image, $smallFontSize, 0, 205, 138, $black, $fontPath, $enrollmentNumber ?? '');
+imagettftext($image, $smallFontSize, 0, 460, 139, $black, $fontPath, $semester ?? '');
+imagettftext($image, $smallFontSize, 0, 710, 139, $black, $fontPath, $branch ?? '');
+imagettftext($image, $smallFontSize, 0, 190, 171, $black, $fontPath, '2025-26');
+imagettftext($image, $smallFontSize, 0, 430, 185, $black, $fontPath, $cardIssueMonth ?? '');
+imagettftext($image, $smallFontSize, 0, 700, 185, $black, $fontPath, $cardNumber ?? '');
 
 // Academic scores (Left section - Academic)
 imagettftext($image, $smallFontSize, 0, 165, 272, $black, $fontPath, $spi ?? '0');
@@ -245,7 +245,7 @@ if (file_exists($tempImagePath)) {
 
 // Output PDF as download
 $pdfFileName = 'GMIU_Certificate_' . preg_replace('/[^a-zA-Z0-9]/', '_', $studentName) . '_' . date('Y-m-d') . '.pdf';
-$pdf->Output($pdfFileName, 'D'); // 'D' = force download
+$pdf->Output($pdfFileName, 'I'); // 'D' = force download
 
 // Clean up
 exit;

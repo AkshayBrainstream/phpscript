@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GMIU Certificate Generator</title>
+    <title>GMIU Employability Performance Scale Certificate Generator</title>
     <style>
         * {
             margin: 0;
@@ -137,11 +137,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>GMIU Certificate Generator</h1>
-        <p class="subtitle">Employability Performance Scale Certificate</p>
+        <h1>Gyanmanjari Innovative University</h1>
+        <p class="subtitle">Employability Performance Scale Certificate Generator</p>
 
         <div class="info-box">
-            <p><strong>Instructions:</strong> Upload an Excel file containing student data. The system will display all records and allow you to generate certificates for all students.</p>
+            <p><strong>Instructions:</strong> Upload an Excel file containing student data. The system will display all records and allow you to generate certificates for students.</p>
         </div>
 
         <div class="upload-section">

@@ -308,8 +308,8 @@ display_students:
 </head>
 <body>
     <div class="container">
-        <h1>Student Records</h1>
-        <p class="subtitle">Review the uploaded data and generate certificates</p>
+        <h1>Gyanmanjari Innovative University</h1>
+        <p class="subtitle">Review the uploaded students data and generate certificates</p>
 
         <div class="info-box">
             <strong>File Uploaded Successfully!</strong><br>
@@ -367,7 +367,7 @@ display_students:
                     ?>
                     <tr>
                         <td>
-                            <a href="generate_single_certificate.php?index=<?php echo $index; ?>" class="btn-download" title="Download Certificate">
+                            <a href="generate_single_certificate.php?index=<?php echo $index; ?>" class="btn-download" title="Download Certificate" target="_black">
                                 📄 Download
                             </a>
                         </td>
@@ -436,9 +436,9 @@ display_students:
 
         <div class="actions">
             <a href="index.php" class="btn btn-secondary">Upload New File</a>
-            <form action="generate_all_certificates.php" method="POST" style="display: inline;" id="generateForm">
+            <!-- <form action="generate_all_certificates.php" method="POST" style="display: inline;" id="generateForm">
                 <button type="submit" class="btn btn-success" id="generateBtn">Generate All Certificates</button>
-            </form>
+            </form> -->
         </div>
 
         <div class="loading" id="loading">
